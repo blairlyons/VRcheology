@@ -91,8 +91,8 @@ public class BlockFactory : MonoBehaviour
 
 	void MakeTestFeatures ()
 	{
-		features.Enqueue(new Feature(new Vector3(1, 5, 2), FeatureType.Pottery, null));
-		features.Enqueue(new Feature(new Vector3(3, 0, 3), FeatureType.Pottery, null));
+		features.Enqueue(new Feature(new Vector3(0, 5, 2), FeatureType.Pottery, null));
+		features.Enqueue(new Feature(new Vector3(1, 0, 0), FeatureType.Pottery, null));
 		features.Enqueue(new Feature(new Vector3(4, 3, 3), FeatureType.Object, null));
 		features.Enqueue(new Feature(new Vector3(5, 5, 2), FeatureType.AnimalBone, null));
 	}
