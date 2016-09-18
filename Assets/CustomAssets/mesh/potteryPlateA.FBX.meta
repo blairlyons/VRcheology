@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3a6e58913aeff7e4bb19198cc0c651bb
-timeCreated: 1474153021
+guid: 4a5606126cc3395458ca084e5da859b2
+timeCreated: 1474166338
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: trowel_head
-    4300002: trowel
+    4300000: potteryPlateA
     9500000: //RootNode
   materials:
     importMaterials: 0
