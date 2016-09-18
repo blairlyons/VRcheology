@@ -4,6 +4,9 @@ using System.Collections;
 public class Shovel : MonoBehaviour
 {
     public GameObject ground;
+    public bool inGround;
+    public GameObject geometry;
+    bool disabled = false;
 
     BlockPointer _pointer;
     BlockPointer pointer
@@ -18,15 +21,26 @@ public class Shovel : MonoBehaviour
         }
     }
 
+    void Update ()
+    {
+
+    }
+
     void OnTriggerEnter (Collider other)
     {   
         if (other.gameObject == ground)
         {
+            inGround = true;
             if (pointer.selectedBlock != null)
             {
                 pointer.selectedBlock.Excavate();
             }
         }
+    }
+
+    public void SetEnabled (bool enable)
+    {
+        geometry.SetActive(enable);
     }
 
     //void OnTriggerExit (Collider other)

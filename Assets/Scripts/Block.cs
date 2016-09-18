@@ -5,8 +5,12 @@ using System.Collections;
 [RequireComponent(typeof(BoxCollider))]
 public class Block : MonoBehaviour 
 {
-    public bool excavated;
+    public int excavated = 2;
 	public Vector3 location;
+
+    public MeshRenderer fullGeometry;
+    public MeshRenderer halfGeometry;
+    MeshRenderer currentGeometry;
 
     BlockFactory _factory;
     BlockFactory factory
@@ -51,16 +55,16 @@ public class Block : MonoBehaviour
 	{
 		location = _location;
 		transform.localPosition = new Vector3(location.x, -location.y, location.z);
-        boxCollider.center = location.y * Vector3.up;
+        //boxCollider.center = location.y * Vector3.up;
 		name = GetType().ToString() + "_" + location.x + ":" + location.y + ":" + location.z;
         CheckVisibility();
 	}
 
     public virtual void Excavate ()
     {
-        if (!excavated)
+        if (excavated > 0)
         {
-            excavated = true;
+            excavated--;
             CheckVisibility();
         }
     }
@@ -69,16 +73,31 @@ public class Block : MonoBehaviour
     {
         if (AtSurface)
         {
-            if (!meshRenderer.enabled)
-            {
-                meshRenderer.enabled = boxCollider.enabled = true;
-            }
+            Debug.Log(name + " at surface");
+            //if (!boxCollider.enabled)
+            //{
+                boxCollider.enabled = true;
+                if (excavated == 2)
+                {
+                    Debug.Log("excavate 2");
+                    fullGeometry.enabled = true;
+                    halfGeometry.enabled = false;
+                }
+                else if (excavated == 1)
+                {
+                    Debug.Log("excavate 1");
+                    fullGeometry.enabled = false;
+                    halfGeometry.enabled = true;
+                }
+            //}
         }
         else
         {
-            if (meshRenderer.enabled)
+            if (boxCollider.enabled)
             {
-                meshRenderer.enabled = boxCollider.enabled = false;
+                Debug.Log("hide");
+                boxCollider.enabled = fullGeometry.enabled = halfGeometry.enabled = false;
+
                 Block blockBelow = factory.GetBlockBelow(location);
                 if (blockBelow != null)
                 {
@@ -93,7 +112,7 @@ public class Block : MonoBehaviour
         get
         {
             Block blockAbove = factory.GetBlockAbove(location);
-            return !excavated && (blockAbove == null || blockAbove.excavated);
+            return excavated > 0 && (blockAbove == null || blockAbove.excavated == 0);
         }
     }
 }

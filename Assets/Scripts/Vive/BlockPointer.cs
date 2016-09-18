@@ -5,14 +5,50 @@ public class BlockPointer : ViveController
 {
     public LayerMask blockLayer;
     public Block selectedBlock;
-	
-	// Update is called once per frame
-	void Update ()
+    public GameObject shovel;
+    public GameObject hand;
+    public GameObject ground;
+
+    // Update is called once per frame
+    void Update ()
     {
-        UpdateSelectedBlock();
+        
 	}
 
-    void UpdateSelectedBlock ()
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == ground)
+        {
+            if (!shovel.activeSelf)
+            {
+                shovel.SetActive(true);
+                if (hand.transform.childCount > 0)
+                {
+                    hand.SetActive(false);
+                }
+            }
+            GetSelectedBlock();
+            if (selectedBlock != null)
+            {
+                Debug.Log("excavate");
+                selectedBlock.Excavate();
+            }
+        }
+    }
+
+    void OnTriggerExit (Collider other)
+    {
+        if (other.gameObject == ground)
+        {
+            if (shovel.activeSelf)
+            {
+                shovel.SetActive(false);
+                hand.SetActive(true);
+            }
+        }
+    }
+
+    void GetSelectedBlock ()
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -22,10 +58,19 @@ public class BlockPointer : ViveController
             if (block != selectedBlock)
             {
                 selectedBlock = block;
+                if (selectedBlock != null)
+                {
+                    Debug.Log(selectedBlock.name);
+                }
+                else
+                {
+                    Debug.Log("selectedBlock is null");
+                }
             }
         }
         else
         {
+            Debug.Log("null");
             selectedBlock = null;
         }
     }
