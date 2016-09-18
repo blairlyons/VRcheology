@@ -51,7 +51,6 @@ public class Parser
             i++;
         }
         digData.features = SortFeatureList(features);
-        Debug.Log(digData.features.Peek().location);
 
         return digData;
     }
@@ -131,10 +130,10 @@ public class Parser
         }
     }
 
-    static Queue<Feature> SortFeatureList(List<Feature> features)
+    static Feature[] SortFeatureList(List<Feature> features)
     {
         //sort list by features[i].location.x, within features with same x sort by features[i].location.z
 
-        return new Queue<Feature>(features);
+        return features.ToArray();
     }
 }

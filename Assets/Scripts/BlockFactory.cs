@@ -21,7 +21,7 @@ public class BlockFactory : MonoBehaviour
 	{
         CenterSite();
         //MakeTestFeatures();
-        features = data.features;
+        features = new Queue<Feature>(data.features);
 		GenerateBlocks();
 	}
 

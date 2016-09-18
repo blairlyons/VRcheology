@@ -4,5 +4,5 @@ using System.Collections.Generic;
 
 public class DigData : ScriptableObject
 {
-    public Queue<Feature> features;
+    public Feature[] features;
 }

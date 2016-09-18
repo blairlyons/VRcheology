@@ -10,6 +10,7 @@ public enum FeatureType
     ArchitecturalElement
 }
 
+[System.Serializable]
 public class Feature 
 {
 	public Vector3 location;
