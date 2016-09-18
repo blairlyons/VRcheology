@@ -9,6 +9,7 @@ public class BlockFactory : MonoBehaviour
 	public Block potteryPrefab;
 	public Block objectPrefab;
     public GameObject ground;
+    public DigData data;
 
 	public Vector3 size;
 	public Block[,,] blocks;
@@ -19,7 +20,8 @@ public class BlockFactory : MonoBehaviour
 	void Start ()
 	{
         CenterSite();
-		MakeTestFeatures();
+        //MakeTestFeatures();
+        features = data.features;
 		GenerateBlocks();
 	}
 
