@@ -6,7 +6,8 @@ public enum FeatureType
 	None,
 	Object,
 	Pottery,
-	AnimalBone
+	AnimalBone,
+    ArchitecturalElement
 }
 
 public class Feature 
