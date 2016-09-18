@@ -29,14 +29,14 @@ public class Shovel : MonoBehaviour
         }
     }
 
-    void OnTriggerExit (Collider other)
-    {
-        if (other.gameObject == ground)
-        {
-            if (pointer.selectedBlock != null)
-            {
-                pointer.selectedBlock.Excavate();
-            }
-        }
-    }
+    //void OnTriggerExit (Collider other)
+    //{
+    //    if (other.gameObject == ground)
+    //    {
+    //        if (pointer.selectedBlock != null)
+    //        {
+    //            pointer.selectedBlock.Excavate();
+    //        }
+    //    }
+    //}
 }

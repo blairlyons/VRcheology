@@ -16,6 +16,7 @@ public class BlockFactory : MonoBehaviour
 	public Queue<Feature> features = new Queue<Feature>();
 
 	Feature nextFeature = null;
+    float maxHeight = 0;
 
 	void Start ()
 	{
@@ -25,10 +26,19 @@ public class BlockFactory : MonoBehaviour
 		GenerateBlocks();
 	}
 
+    void Update ()
+    {
+        if (Camera.main.transform.position.y > maxHeight)
+        {
+            maxHeight = Camera.main.transform.position.y;
+        }
+        ground.transform.position = transform.position + Mathf.Clamp(0.3f * maxHeight / 1.6f, 0.1f, 2f) * Vector3.up;
+        Debug.Log(ground.transform.position.y + 2f);
+    }
+
     void CenterSite ()
     {
         transform.position = new Vector3((1 - size.x) / 2, -2, (1 - size.z) / 2);
-        ground.transform.position = 0.3f * Vector3.up;
         ground.transform.localScale = new Vector3(size.x, 0.2f, size.z);
     }
 
