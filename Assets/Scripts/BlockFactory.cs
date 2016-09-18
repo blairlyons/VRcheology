@@ -8,6 +8,7 @@ public class BlockFactory : MonoBehaviour
 	public Block animalBonePrefab;
 	public Block potteryPrefab;
 	public Block objectPrefab;
+    public GameObject ground;
 
 	public Vector3 size;
 	public Block[,,] blocks;
@@ -25,6 +26,8 @@ public class BlockFactory : MonoBehaviour
     void CenterSite ()
     {
         transform.position = new Vector3((1 - size.x) / 2, -2, (1 - size.z) / 2);
+        ground.transform.position = 0.3f * Vector3.up;
+        ground.transform.localScale = new Vector3(size.x, 0.2f, size.z);
     }
 
 	void GenerateBlocks ()
@@ -99,7 +102,7 @@ public class BlockFactory : MonoBehaviour
 	{
 		features.Enqueue(new Feature(new Vector3(0, 5, 2), FeatureType.Pottery, null));
 		features.Enqueue(new Feature(new Vector3(1, 0, 0), FeatureType.Pottery, null));
-		features.Enqueue(new Feature(new Vector3(4, 3, 3), FeatureType.Object, null));
+		features.Enqueue(new Feature(new Vector3(4, 3, 1), FeatureType.Object, null));
 		features.Enqueue(new Feature(new Vector3(5, 5, 2), FeatureType.AnimalBone, null));
 	}
 
