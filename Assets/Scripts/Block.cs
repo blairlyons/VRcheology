@@ -57,7 +57,7 @@ public class Block : MonoBehaviour
 		transform.localPosition = new Vector3(location.x, -location.y, location.z);
         //boxCollider.center = location.y * Vector3.up;
 		name = GetType().ToString() + "_" + location.x + ":" + location.y + ":" + location.z;
-        CheckVisibility();
+        //CheckVisibility();
 	}
 
     public virtual void Excavate ()
@@ -65,45 +65,8 @@ public class Block : MonoBehaviour
         if (excavated > 0)
         {
             excavated--;
-            CheckVisibility();
-        }
-    }
-
-    public void CheckVisibility ()
-    {
-        if (AtSurface)
-        {
-            Debug.Log(name + " at surface");
-            //if (!boxCollider.enabled)
-            //{
-                boxCollider.enabled = true;
-                if (excavated == 2)
-                {
-                    Debug.Log("excavate 2");
-                    fullGeometry.enabled = true;
-                    halfGeometry.enabled = false;
-                }
-                else if (excavated == 1)
-                {
-                    Debug.Log("excavate 1");
-                    fullGeometry.enabled = false;
-                    halfGeometry.enabled = true;
-                }
-            //}
-        }
-        else
-        {
-            if (boxCollider.enabled)
-            {
-                Debug.Log("hide");
-                boxCollider.enabled = fullGeometry.enabled = halfGeometry.enabled = false;
-
-                Block blockBelow = factory.GetBlockBelow(location);
-                if (blockBelow != null)
-                {
-                    blockBelow.CheckVisibility();
-                }
-            }
+            fullGeometry.enabled = false;
+            boxCollider.enabled = false;
         }
     }
 
