@@ -17,9 +17,15 @@ public class BlockFactory : MonoBehaviour
 
 	void Start ()
 	{
+        CenterSite();
 		MakeTestFeatures();
 		GenerateBlocks();
 	}
+
+    void CenterSite ()
+    {
+        transform.position = new Vector3((1 - size.x) / 2, -2, (1 - size.z) / 2);
+    }
 
 	void GenerateBlocks ()
 	{
@@ -96,4 +102,28 @@ public class BlockFactory : MonoBehaviour
 		features.Enqueue(new Feature(new Vector3(4, 3, 3), FeatureType.Object, null));
 		features.Enqueue(new Feature(new Vector3(5, 5, 2), FeatureType.AnimalBone, null));
 	}
+
+    public Block GetBlockAbove (Vector3 location)
+    {
+        if (location.y > 0)
+        {
+            return blocks[Mathf.RoundToInt(location.x), Mathf.RoundToInt(location.y) - 1, Mathf.RoundToInt(location.z)];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public Block GetBlockBelow (Vector3 location)
+    {
+        if (location.y < size.y - 1)
+        {
+            return blocks[Mathf.RoundToInt(location.x), Mathf.RoundToInt(location.y) + 1, Mathf.RoundToInt(location.z)];
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

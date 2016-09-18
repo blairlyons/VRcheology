@@ -8,11 +8,52 @@ public class Block : MonoBehaviour
     public bool excavated;
 	public Vector3 location;
 
-	public virtual void Init (Vector3 _location)
+    BlockFactory _factory;
+    BlockFactory factory
+    {
+        get
+        {
+            if (_factory == null)
+            {
+                _factory = GetComponentInParent<BlockFactory>();
+            }
+            return _factory;
+        }
+    }
+
+    MeshRenderer _meshRenderer;
+    MeshRenderer meshRenderer
+    {
+        get
+        {
+            if (_meshRenderer == null)
+            {
+                _meshRenderer = GetComponent<MeshRenderer>();
+            }
+            return _meshRenderer;
+        }
+    }
+
+    BoxCollider _boxCollider;
+    BoxCollider boxCollider
+    {
+        get
+        {
+            if (_boxCollider == null)
+            {
+                _boxCollider = GetComponent<BoxCollider>();
+            }
+            return _boxCollider;
+        }
+    }
+
+    public virtual void Init (Vector3 _location)
 	{
 		location = _location;
-		transform.localPosition = new Vector3(location.x, -location.z, location.y);
+		transform.localPosition = new Vector3(location.x, -location.y, location.z);
+        boxCollider.center = location.y * Vector3.up;
 		name = GetType().ToString() + "_" + location.x + ":" + location.y + ":" + location.z;
+        CheckVisibility();
 	}
 
     public virtual void Excavate ()
@@ -20,8 +61,41 @@ public class Block : MonoBehaviour
         if (!excavated)
         {
             excavated = true;
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
+            CheckVisibility();
+        }
+    }
+
+    public void CheckVisibility ()
+    {
+        if (AtSurface)
+        {
+            if (!meshRenderer.enabled)
+            {
+                meshRenderer.enabled = boxCollider.enabled = true;
+            }
+        }
+        else
+        {
+            if (meshRenderer.enabled)
+            {
+                meshRenderer.enabled = boxCollider.enabled = false;
+                Debug.Log(name + " Getting block below");
+                Block blockBelow = factory.GetBlockBelow(location);
+                if (blockBelow != null)
+                {
+                    Debug.Log(name + " Checking");
+                    blockBelow.Invoke("CheckVisibility", 2);
+                }
+            }
+        }
+    }
+
+    bool AtSurface
+    {
+        get
+        {
+            Block blockAbove = factory.GetBlockAbove(location);
+            return !excavated && (blockAbove == null || blockAbove.excavated);
         }
     }
 }

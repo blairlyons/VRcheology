@@ -8,7 +8,7 @@ public class Shovel : MonoBehaviour {
         Block block = other.GetComponent<Block>();
         if (block != null)
         {
-            block.GetComponent<MeshRenderer>().material.color = Color.blue;
+            block.Excavate();
         }
     }
 }
