@@ -1,14 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shovel : MonoBehaviour {
+public class Shovel : MonoBehaviour
+{
+    public GameObject ground;
 
-	void OnTriggerEnter (Collider other)
+    BlockPointer _pointer;
+    BlockPointer pointer
     {
-        Block block = other.GetComponent<Block>();
-        if (block != null)
+        get
         {
-            block.Excavate();
+            if (_pointer == null)
+            {
+                _pointer = GetComponentInParent<BlockPointer>();
+            }
+            return _pointer;
+        }
+    }
+
+    void OnTriggerEnter (Collider other)
+    {   
+        if (other.gameObject == ground)
+        {
+            if (pointer.selectedBlock != null)
+            {
+                pointer.selectedBlock.Excavate();
+            }
+        }
+    }
+
+    void OnTriggerExit (Collider other)
+    {
+        if (other.gameObject == ground)
+        {
+            if (pointer.selectedBlock != null)
+            {
+                pointer.selectedBlock.Excavate();
+            }
         }
     }
 }

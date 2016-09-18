@@ -22,7 +22,7 @@ public class Block : MonoBehaviour
     }
 
     MeshRenderer _meshRenderer;
-    MeshRenderer meshRenderer
+    public MeshRenderer meshRenderer
     {
         get
         {
@@ -79,12 +79,10 @@ public class Block : MonoBehaviour
             if (meshRenderer.enabled)
             {
                 meshRenderer.enabled = boxCollider.enabled = false;
-                Debug.Log(name + " Getting block below");
                 Block blockBelow = factory.GetBlockBelow(location);
                 if (blockBelow != null)
                 {
-                    Debug.Log(name + " Checking");
-                    blockBelow.Invoke("CheckVisibility", 2);
+                    blockBelow.CheckVisibility();
                 }
             }
         }
