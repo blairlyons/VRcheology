@@ -21,7 +21,6 @@ GameObject:
   - 4: {fileID: 4000010055247584}
   - 33: {fileID: 33000010208030402}
   - 23: {fileID: 23000013428719160}
-  - 65: {fileID: 65000014153018806}
   m_Layer: 0
   m_Name: groundFull
   m_TagString: Untagged
@@ -58,7 +57,6 @@ GameObject:
   - 4: {fileID: 4000010765949484}
   - 33: {fileID: 33000011682668624}
   - 23: {fileID: 23000011815615662}
-  - 65: {fileID: 65000013947150360}
   m_Layer: 0
   m_Name: groundHalf
   m_TagString: Untagged
@@ -227,30 +225,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65000013947150360
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013384945494}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0.25, z: 0}
---- !u!65 &65000014153018806
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011984847752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &114000011358264418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4585c7af606e4a3fad1160d31253d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excavated: 2
+  excavated: 1
   location: {x: 0, y: 0, z: 0}
   fullGeometry: {fileID: 23000013428719160}
   halfGeometry: {fileID: 23000011815615662}

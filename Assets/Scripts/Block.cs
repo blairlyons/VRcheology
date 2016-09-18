@@ -11,6 +11,7 @@ public class Block : MonoBehaviour
     public MeshRenderer fullGeometry;
     public MeshRenderer halfGeometry;
     MeshRenderer currentGeometry;
+    public GameObject image;
 
     BlockFactory _factory;
     BlockFactory factory
@@ -65,8 +66,11 @@ public class Block : MonoBehaviour
         if (excavated > 0)
         {
             excavated--;
-            fullGeometry.enabled = false;
-            boxCollider.enabled = false;
+            if (fullGeometry != null)
+            {
+                fullGeometry.enabled = false;
+                boxCollider.enabled = false;
+            }
         }
     }
 
@@ -76,6 +80,22 @@ public class Block : MonoBehaviour
         {
             Block blockAbove = factory.GetBlockAbove(location);
             return excavated > 0 && (blockAbove == null || blockAbove.excavated == 0);
+        }
+    }
+
+    public void ToggleImage ()
+    {
+        if (image != null)
+        {
+            if (image.activeSelf)
+            {
+                image.SetActive(false);
+            }
+            else
+            {
+                image.transform.position = new Vector3(image.transform.position.x, 1.5f, image.transform.position.z);
+                image.SetActive(true);
+            }
         }
     }
 }

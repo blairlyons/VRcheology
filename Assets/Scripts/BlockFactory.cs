@@ -39,7 +39,7 @@ public class BlockFactory : MonoBehaviour
 
     void CenterSite ()
     {
-        positionOffset = new Vector3((1 - size.x) / 2, -2, (1 - size.z) / 2);
+        positionOffset = new Vector3((1 - size.x) / 2, -1, (1 - size.z) / 2);
         transform.position = positionOffset;
         ground.transform.localScale = new Vector3(size.x, 0.2f, size.z);
     }
